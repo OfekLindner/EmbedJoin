@@ -35,18 +35,25 @@ class EmbedJoin:
         self.m = length_of_LSH_sig
         self.Sigma = 4
 
-    def preprocessing(self, input_file_path):
+    def preprocessing1(self, input_file_path):
         """
-        Preprocessing Algorithm
+        Preprocessing Algorithm Part 1
         :param input_file_path:  the path of the input file
 
         :return: S: input strands in sorted order,
-                 T: Strings after CGK-embedding,
-                    D: Hash tables
         """
         S = sorted(input_set_create(input_file_path), key=len)
         self.S_dict = {i: s for i, s in enumerate(S)}
         self.N = len(S[-1])  # length of the longest strand in S
+
+    def preprocessing2(self):
+        """
+        Preprocessing Algorithm Part 2
+        :param input_file_path:  the path of the input file
+
+        :return: T: Strings after CGK-embedding,
+                 D: Hash tables
+        """
         self.D = self.LSH_matrix()
         self.R = self.symbols_hashing()
         self.T = self.embedding_create()
